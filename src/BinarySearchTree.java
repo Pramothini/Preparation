@@ -11,7 +11,7 @@ class Node{
 }
 
 /**
- * Program to 
+ * Program that implements Binary Search Tree
  * @author pramothinidk
  *
  */
@@ -47,9 +47,11 @@ public class BinarySearchTree {
 	 * @param n
 	 */
 	public void findMin(Node n){
-		while (n.left!=null)
-			n = n.left;
-		System.out.println( " The min element in this BST is "+ n.data);
+		if(n != null){
+			while (n.left!=null)
+				n = n.left;
+			System.out.println( " The min element in this BST is "+ n.data);
+		}
 	}
 
 	/**
@@ -57,9 +59,11 @@ public class BinarySearchTree {
 	 * @param n
 	 */
 	public void findMax(Node n){
-		while (n.right!=null)
-			n = n.right;
-		System.out.println( " The max element in this BST is "+ n.data);
+		if(n != null){
+			while (n.right!=null)
+				n = n.right;
+			System.out.println( " The max element in this BST is "+ n.data);
+		}
 	}
 
 	public static void printBST(Node curNode){
@@ -74,24 +78,68 @@ public class BinarySearchTree {
 			printBST(curNode.left);
 		if(curNode.right != null)
 			printBST(curNode.right);
-
-
 	}
-
+	
+	/**
+	 * Traverse and print the BST inorder
+	 * inorder - left, current node, right
+	 * @param node
+	 */
+	public void inorderTraversal(Node node){
+		if(node == null)
+			return;
+		inorderTraversal(node.left);
+		System.out.println(node.data);
+		inorderTraversal(node.right);
+	}
+	
+	/**
+	 * Traverse and print the BST preorder
+	 * preorder - current node,left,right
+	 * @param node
+	 */
+	public void preorderTraversal(Node node){
+		if(node == null)
+			return;
+		System.out.println(node.data);
+		preorderTraversal(node.left);
+		inorderTraversal(node.right);
+	}
+	
+	/**
+	 * Traverse and print the BST postorder
+	 * postorder - left,right,current node
+	 * @param node
+	 */
+	public void postorderTraversal(Node node){
+		if(node == null)
+			return;
+		postorderTraversal(node.left);
+		inorderTraversal(node.right);
+		System.out.println(node.data);
+	}
+	
 	public static void main(String args[]){
 		BinarySearchTree bst = new BinarySearchTree();
-		Node top = new Node(12);
+		Node top = new Node(40);
+		bst.insertData(top,25);
+		bst.insertData(top,78);
 		bst.insertData(top,10);
-		bst.insertData(top,11);
-		bst.insertData(top,9);
-		bst.insertData(top,50);
-		bst.insertData(top,40);
+		bst.insertData(top,32);
 		printBST(top);
 		bst.findMin(top);
-		//output : The min element in this BST is 9
+		//output : The min element in this BST is 10
 		bst.findMax(top);
-		// output : The max element in this BST is 50
+		// output : The max element in this BST is 78
+		
+		System.out.println("Inorder traversal");
+		bst.inorderTraversal(top);
 
+		System.out.println("preorder traversal");
+		bst.preorderTraversal(top);
+		
+		System.out.println("postorder traversal");
+		bst.postorderTraversal(top);
 	}
 }
 
