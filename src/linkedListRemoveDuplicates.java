@@ -45,6 +45,20 @@ public class linkedListRemoveDuplicates {
 			}
 		}
 		
+		public void removeDuplicatesFromUnsortedListUsingPrev(){
+			Set<Integer> s = new HashSet<Integer>();
+			Node cur = this;
+			Node prev = null;
+			while(cur!=null){
+				if(s.contains(cur.data)){
+					prev.next = cur.next;
+				}
+				s.add(cur.data);
+				prev = cur;
+				cur = cur.next;
+			}
+		}
+		
 		public void removeDuplicatesFromSortedList(){
 			Node head = this;
 			while(head != null){
@@ -64,7 +78,7 @@ public class linkedListRemoveDuplicates {
 			n.insert(7);
 			System.out.println("Unsorted Input ");
 			n.printNodes();
-			n.removeDuplicatesFromUnsortedList();
+			n.removeDuplicatesFromUnsortedListUsingPrev();
 			System.out.println("\nAfter removing duplicates ");
 			n.printNodes();
 			
