@@ -8,6 +8,7 @@ public class UniqueCharsInString {
 
 public static void main(String[] args){
 String a = "King".toLowerCase();
+//int[] a1 = new int[a.length()];
 System.out.println(" Is the string contain all unique chars ? "+ UniqueCharsInString.isUnique(a));
 }
 
