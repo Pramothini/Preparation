@@ -11,12 +11,12 @@ class Node{
 }
 
 /**
- * Program to recursively add a new element to a binary search tree
+ * Program to 
  * @author pramothinidk
  *
  */
 public class BinarySearchTree {
-	
+
 	/**
 	 * recursively adds a new element to a binary search tree
 	 * @param curNode
@@ -40,6 +40,26 @@ public class BinarySearchTree {
 			else
 				insertData(curNode.right,data);
 		}
+	}
+
+	/**
+	 * Finds the min element present in this BST
+	 * @param n
+	 */
+	public void findMin(Node n){
+		while (n.left!=null)
+			n = n.left;
+		System.out.println( " The min element in this BST is "+ n.data);
+	}
+
+	/**
+	 * Finds the max element present in this BST
+	 * @param n
+	 */
+	public void findMax(Node n){
+		while (n.right!=null)
+			n = n.right;
+		System.out.println( " The max element in this BST is "+ n.data);
 	}
 
 	public static void printBST(Node curNode){
@@ -67,6 +87,10 @@ public class BinarySearchTree {
 		bst.insertData(top,50);
 		bst.insertData(top,40);
 		printBST(top);
+		bst.findMin(top);
+		//output : The min element in this BST is 9
+		bst.findMax(top);
+		// output : The max element in this BST is 50
 
 	}
 }
