@@ -23,11 +23,9 @@ public class ConstructionOfBinaryTree {
 			return null;
 		Node root = new Node(pre[preStart]);
 		int offset = inorderHM.get(pre[preStart]);
-//		root.left = constructTree(in,inStart,offset-1,pre,preStart+1,offset+preStart-1);
-//		root.right = constructTree(in,offset+1,inEnd,pre,preStart+offset+1,preEnd);
-		
-		root.left = constructTree(in,inStart,offset-1,pre,preStart+1,offset+preStart-inStart);
-		root.right = constructTree(in,offset+1,inEnd,pre,preStart+offset-inStart+1,preEnd);
+		int len = offset - inStart;
+		root.left = constructTree(in,inStart,offset-1,pre,preStart+1,preStart+len);
+		root.right = constructTree(in,offset+1,inEnd,pre,preStart+len+1,preEnd);
 		return root;
 		
 	}
@@ -48,11 +46,11 @@ public class ConstructionOfBinaryTree {
 	
 	public static void main(String args[]){
 		ConstructionOfBinaryTree cbst = new ConstructionOfBinaryTree();
-		int[] preorder = {7,10,4,3,1,2,8,11};
-		int[] inorder = {4,10,3,1,7,11,8,2};
+//		int[] preorder = {7,10,4,3,1,2,8,11};
+//		int[] inorder = {4,10,3,1,7,11,8,2};
 		
-//		int[] inorder = {10,30,40,50,60,70,90};
-//		int[] preorder = {50,30,10,40,70,60,90};
+		int[] inorder = {10,30,40,50,60,70,90};
+		int[] preorder = {50,30,10,40,70,60,90};
 		cbst.mapIndex(inorder);
 		Node n = cbst.constructTree(inorder, 0 , inorder.length-1 ,preorder,0,preorder.length-1);
 		cbst.printBST(n);
