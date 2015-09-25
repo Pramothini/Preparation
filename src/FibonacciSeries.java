@@ -5,7 +5,6 @@
  *
  */
 public class FibonacciSeries {
-
 	int[] fibonacciSeries(int n){
 		int fibSeries[] = new int[n];
 		int a,b;

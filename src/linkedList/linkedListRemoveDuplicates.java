@@ -47,6 +47,7 @@ public class linkedListRemoveDuplicates {
 			}
 		}
 		
+		//easy method
 		public void removeDuplicatesFromUnsortedListUsingPrev(){
 			Set<Integer> s = new HashSet<Integer>();
 			Node cur = this;

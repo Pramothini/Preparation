@@ -31,6 +31,7 @@ public class ReverseWordsInAString {
 	public static void main(String args[]){
 		ReverseWordsInAString rstr = new ReverseWordsInAString();
 		Scanner sc = new Scanner(System.in);
+		int intin = Integer.parseInt(sc.nextLine());
 		String input = sc.nextLine();
 		rstr.reverseWords(input);
 	}
