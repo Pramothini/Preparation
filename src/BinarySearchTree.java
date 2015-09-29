@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 class Node{
 	Node left;
 	Node right;
@@ -66,6 +68,45 @@ public class BinarySearchTree {
 		}
 	}
 
+	/**
+	 * Traverse and print the BST inorder
+	 * inorder - left, current node, right
+	 * @param node
+	 */
+	public void inorderTraversal(Node node){
+		if(node == null)
+			return;
+		inorderTraversal(node.left);
+		System.out.println(node.data);
+		inorderTraversal(node.right);
+	}
+
+	/**
+	 * Traverse and print the BST preorder
+	 * preorder - current node,left,right
+	 * @param node
+	 */
+	public void preorderTraversal(Node node){
+		if(node == null)
+			return;
+		System.out.println(node.data);
+		preorderTraversal(node.left);
+		preorderTraversal(node.right);
+	}
+
+	/**
+	 * Traverse and print the BST postorder
+	 * postorder - left,right,current node
+	 * @param node
+	 */
+	public void postorderTraversal(Node node){
+		if(node == null)
+			return;
+		postorderTraversal(node.left);
+		postorderTraversal(node.right);
+		System.out.println(node.data);
+	}
+
 	public static void printBST(Node curNode){
 		if(curNode != null)
 			System.out.println(curNode.data);
@@ -79,46 +120,76 @@ public class BinarySearchTree {
 		if(curNode.right != null)
 			printBST(curNode.right);
 	}
-	
+
 	/**
-	 * Traverse and print the BST inorder
-	 * inorder - left, current node, right
-	 * @param node
+	 * Print the top view of the binary tree.
+	 * @param root
 	 */
-	public void inorderTraversal(Node node){
-		if(node == null)
-			return;
-		inorderTraversal(node.left);
-		System.out.println(node.data);
-		inorderTraversal(node.right);
+	void top_view(Node root)
+	{
+		Stack stack = new Stack();
+		Node rootleft = root.left;
+		Node rootright = root.right;
+		while(rootleft != null){
+			stack.push(rootleft.data);
+			rootleft = rootleft.left;
+		}
+
+		while(!stack.isEmpty()){
+			System.out.print(stack.pop() + " ");
+		}
+		System.out.print(root.data + " ");
+
+		while(rootright != null){
+			System.out.print(rootright.data + " ");
+			rootright = rootright.right;
+		}
+
 	}
-	
+
+
 	/**
-	 * Traverse and print the BST preorder
-	 * preorder - current node,left,right
-	 * @param node
+	 * Iteratively traverses and prints a binary Tree
+	 * @param root
 	 */
-	public void preorderTraversal(Node node){
-		if(node == null)
-			return;
-		System.out.println(node.data);
-		preorderTraversal(node.left);
-		inorderTraversal(node.right);
+	public void printPostOrderIterative(Node root) {
+		if(root == null)
+			return; 
+		Stack<Node> stack = new Stack<Node>();
+		stack.push(root);
+		Node previous = null;
+		while(!stack.empty()){
+			Node current = stack.peek();
+			if(previous == null || previous.left == current || previous.right == current){
+				if(current.left != null){
+					stack.push(current.left);
+				}else if(current.right != null){
+					stack.push(current.right);
+				}else{
+					System.out.println(stack.pop().data);
+				}
+			}else if(current.left == previous){
+				if(current.right == null){
+					System.out.println(stack.pop().data);
+				}else{
+					stack.push(current.right);
+				}
+			}else if(current.right == previous){
+				System.out.println(stack.pop().data);
+			}
+			previous = current;
+		}
+
 	}
-	
-	/**
-	 * Traverse and print the BST postorder
-	 * postorder - left,right,current node
-	 * @param node
-	 */
-	public void postorderTraversal(Node node){
-		if(node == null)
-			return;
-		postorderTraversal(node.left);
-		inorderTraversal(node.right);
-		System.out.println(node.data);
+
+	int height(Node root)
+	{
+		if(root == null)
+			return 0;
+		return 1+Math.max(height(root.left),height(root.right));
+
 	}
-	
+
 	public static void main(String args[]){
 		BinarySearchTree bst = new BinarySearchTree();
 		Node top = new Node(40);
@@ -127,19 +198,28 @@ public class BinarySearchTree {
 		bst.insertData(top,10);
 		bst.insertData(top,32);
 		printBST(top);
+		
+		System.out.println("Height of the tree is "+ bst.height(top));
+
 		bst.findMin(top);
 		//output : The min element in this BST is 10
 		bst.findMax(top);
 		// output : The max element in this BST is 78
-		
+
 		System.out.println("Inorder traversal");
 		bst.inorderTraversal(top);
 
 		System.out.println("preorder traversal");
 		bst.preorderTraversal(top);
-		
-		System.out.println("postorder traversal");
+
+		System.out.println("postorder traversal - recursive");
 		bst.postorderTraversal(top);
+
+		System.out.println();
+
+
+		System.out.println("postorder traversal - iterative");
+		bst.printPostOrderIterative(top);
 	}
 }
 
