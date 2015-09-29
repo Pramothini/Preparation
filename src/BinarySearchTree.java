@@ -189,6 +189,33 @@ public class BinarySearchTree {
 		return 1+Math.max(height(root.left),height(root.right));
 
 	}
+	
+	/**
+	 * return the lowest common ancestor (LCA) of v1 and v2 in the binary search tree
+	 * 
+	 * http://articles.leetcode.com/2011/07/lowest-common-ancestor-of-a-binary-search-tree.html
+	 * 
+	 * There’s only three cases you need to consider.
+
+			Both nodes are to the left of the tree.
+			Both nodes are to the right of the tree.
+			One node is on the left while the other is on the right.
+	 * @param root
+	 * @param v1
+	 * @param v2
+	 * @return
+	 */
+	static Node lca(Node root,int v1,int v2)
+    {
+    if(Math.max(v1,v2) < root.data)
+        return lca(root.left, v1,v2);
+    else if(Math.min(v1,v2) > root.data)
+        return lca(root.right, v1,v2);
+    else
+        return root;
+
+       
+    }
 
 	public static void main(String args[]){
 		BinarySearchTree bst = new BinarySearchTree();
@@ -200,6 +227,7 @@ public class BinarySearchTree {
 		printBST(top);
 		
 		System.out.println("Height of the tree is "+ bst.height(top));
+		System.out.println("lca of the tree is "+ lca(top,10,32).data);
 
 		bst.findMin(top);
 		//output : The min element in this BST is 10
