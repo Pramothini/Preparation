@@ -1,4 +1,4 @@
-package sorting_hackerrank;
+package hackerRank.sorting_hackerrank;
 
 import java.util.*;
 
