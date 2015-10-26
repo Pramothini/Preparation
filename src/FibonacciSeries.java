@@ -6,25 +6,6 @@
  */
 public class FibonacciSeries {
 	int[] fibonacciSeries(int n){
-//		int fibSeries[] = new int[n];
-//		int a,b;
-//		fibSeries[0] = a = 0;
-//		fibSeries[1] = b = 1;
-//		int i = 2;
-//		while(i < n){
-//			int c = a+b;
-//			fibSeries[i] = c;
-//			a = b;
-//			b = c;
-//			i++;
-//		}
-//		return fibSeries;
-		
-		
-		
-		
-		
-		
 		int[] fibseries = new int[n];
 		int a = 0,b = 1;
 		if(n>=1) fibseries[0] = a;
