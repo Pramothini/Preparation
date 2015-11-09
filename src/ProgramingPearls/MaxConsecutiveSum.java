@@ -3,10 +3,10 @@ package ProgramingPearls;
 public class MaxConsecutiveSum {
 
 	public void getMaxSum(int[] input){
-		int maxsofar = 0;
-		int maxendinghere = 0;
-		for(int i=0;i<input.length;i++){
-			maxendinghere = Math.max(maxendinghere + input[i] , 0);
+		int maxsofar = input[0];
+		int maxendinghere = input[0];
+		for(int i=1;i<input.length;i++){
+			maxendinghere = Math.max(maxendinghere + input[i] , input[i]);
 			maxsofar = Math.max(maxendinghere, maxsofar);
 		}
 		System.out.println("max sum is "+maxsofar);
